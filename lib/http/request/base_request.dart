@@ -28,9 +28,9 @@ abstract class BaseRequest {
       }
     }
     if (useHttps) {
-      uri = Uri.https(authority(), pathStr, pathParams);
+      uri = Uri.https(authority(), pathStr, params);
     } else {
-      uri = Uri.http(authority(), pathStr, pathParams);
+      uri = Uri.http(authority(), pathStr, params);
     }
     print('url:${uri.toString()}');
     return uri.toString();
@@ -40,8 +40,9 @@ abstract class BaseRequest {
   Map<String, String> params = {};
 
   /// 添加参数
-  BaseRequest? add(String k, Object v) {
+  BaseRequest add(String k, Object v) {
     params[k] = v.toString();
+    return this;
   }
 
   Map<String, String> header = {};

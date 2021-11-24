@@ -24,7 +24,7 @@ class HiNet {
     return Future.value(
       {
         "stateCode": 200,
-        "data": {"code": 200},
+        "data": {"code": 0, 'message': 'success'},
       },
     );
   }

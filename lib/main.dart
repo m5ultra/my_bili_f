@@ -54,7 +54,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _incrementCounter() async {
     TestRequest request = TestRequest();
-    request.add('aa', {'name': 123})?.add('bb', {'age': 33});
+    request.add('aa', {'name': 'ams'}).add('bb', {'age': '122'});
     var result = await HiNet.getInstance()!.fire(request);
     print(result);
   }
