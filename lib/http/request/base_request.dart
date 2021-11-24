@@ -7,14 +7,17 @@ abstract class BaseRequest {
   dynamic pathParams;
   dynamic useHttps = true;
 
+  /// 返回baseUrl
   String authority() {
     return 'api.devio.org';
   }
 
+  /// 请求方式 GET POST PUT DELETE
   HttpMethod httpMethod();
 
   String path();
 
+  /// 返回请求完整地址
   String url() {
     Uri uri;
     String pathStr = path();
@@ -37,6 +40,7 @@ abstract class BaseRequest {
   }
 
   bool nedLogin();
+
   Map<String, String> params = {};
 
   /// 添加参数
@@ -46,6 +50,7 @@ abstract class BaseRequest {
   }
 
   Map<String, String> header = {};
+
   BaseRequest addHeader(String k, Object v) {
     header[k] = v.toString();
     return this;
