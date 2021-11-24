@@ -47,7 +47,7 @@ abstract class BaseRequest {
 
   Map<String, String> header = {};
   BaseRequest addHeader(String k, Object v) {
-    params[k] = v.toString();
+    header[k] = v.toString();
     return this;
   }
 }
