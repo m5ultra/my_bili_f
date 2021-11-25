@@ -35,8 +35,13 @@ abstract class BaseRequest {
     } else {
       uri = Uri.http(authority(), pathStr, params);
     }
-    print('url:${uri.toString()}');
-    return uri.toString();
+    if (uri.toString().endsWith('?')) {
+      return uri
+          .toString()
+          .replaceRange(uri.toString().length - 1, uri.toString().length, '');
+    } else {
+      return uri.toString();
+    }
   }
 
   bool nedLogin();

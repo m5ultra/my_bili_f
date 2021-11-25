@@ -11,7 +11,7 @@ class MockAdapter extends HiNetAdapter {
       () {
         return HiNetResponse(
           data: {"code": '0', 'message': 'success'} as T,
-          statusCode: 403,
+          statusCode: 200,
         );
       },
     );
