@@ -1,5 +1,5 @@
+import 'package:my_bili_f/http/core/dio_adapter.dart';
 import 'package:my_bili_f/http/core/hi_net_adapter.dart';
-import 'package:my_bili_f/http/core/mock_adapter.dart';
 import 'package:my_bili_f/http/request/base_request.dart';
 
 import 'hi_error.dart';
@@ -50,7 +50,8 @@ class HiNet {
     printLog('url: ${request.url()}');
 
     /// 使用mock 发送数据
-    HiNetAdapter adapter = MockAdapter();
+    // HiNetAdapter adapter = MockAdapter();
+    HiNetAdapter adapter = DioAdapter();
     return adapter.send(request);
   }
 
