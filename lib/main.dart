@@ -55,12 +55,15 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _incrementCounter() async {
     TestRequest request = TestRequest();
-    request.add('aa', '11').add('bb', '22');
-    // var result = await HiNet.getInstance()!.fire(request);
-    // print(result);
+    request
+        .add('name', '卡布奇诺')
+        .add('password', '123456')
+        .addHeader('connectTimeout', 50 * 1000)
+        .addHeader('receiveTimeout', 50 * 1000)
+        .addHeader("contentType", "application/json");
     try {
-      var result = await HiNet.getInstance()!.fire(request);
-      print(result);
+      var result = await HiNet.instance.fire(request);
+      print('main: ${result}');
     } on NeedAuth catch (e) {
       print(e);
     } on NeedLogin catch (e) {

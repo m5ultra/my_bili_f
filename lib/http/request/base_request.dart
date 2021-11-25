@@ -5,11 +5,11 @@ abstract class BaseRequest {
   /// curl -X GET "https://api/devio.org/test/test?requestParams=11" -H "accept: */*"
   /// curl -X GET "https://api.devio.org/uapi/test/test/1"
   dynamic pathParams;
-  dynamic useHttps = true;
+  dynamic useHttps = false;
 
   /// 返回baseUrl
   String authority() {
-    return 'api.devio.org';
+    return 'localhost:5288';
   }
 
   /// 请求方式 GET POST PUT DELETE
@@ -54,7 +54,7 @@ abstract class BaseRequest {
     return this;
   }
 
-  Map<String, String> header = {};
+  Map<String, dynamic> header = {};
 
   BaseRequest addHeader(String k, Object v) {
     header[k] = v.toString();

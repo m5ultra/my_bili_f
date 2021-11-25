@@ -10,15 +10,26 @@ class DioAdapter extends HiNetAdapter {
   Future<HiNetResponse<T>> send<T>(BaseRequest request) async {
     var response, options = Options(headers: request.header);
     var error;
+    var _dio = Dio();
     try {
       if (request.httpMethod() == HttpMethod.GET) {
-        response = await Dio().get(request.url(), options: options);
+        response = await _dio.get(request.url(), options: options);
       } else if (request.httpMethod() == HttpMethod.POST) {
-        response = await Dio()
-            .post(request.url(), data: request.params, options: options);
+        // try {
+        //   _dio.options.connectTimeout = 5000;
+        //   _dio.options.receiveTimeout = 3000;
+        //   response = await _dio.post(
+        //     'http://localhost:5288/users/login',
+        //     data: {"name": "卡布奇诺", "password": "123456"},
+        //   );
+        // } catch (e) {
+        //   print(e);
+        // }
+        response = await _dio.post(request.url(),
+            data: request.params, options: options);
       } else if (request.httpMethod() == HttpMethod.DELETE) {
-        response = await Dio()
-            .delete(request.url(), data: request.params, options: options);
+        response = await _dio.delete(request.url(),
+            data: request.params, options: options);
       }
     } on DioError catch (e) {
       error = e;

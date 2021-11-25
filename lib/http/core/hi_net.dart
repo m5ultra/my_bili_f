@@ -1,18 +1,35 @@
-import 'package:my_bili_f/http/core/dio_adapter.dart';
 import 'package:my_bili_f/http/core/hi_net_adapter.dart';
 import 'package:my_bili_f/http/request/base_request.dart';
 
+import 'dio_adapter.dart';
 import 'hi_error.dart';
 
 class HiNet {
-  HiNet._();
+  /// 贾鹏飞
+  // HiNet._();
+  //
+  // static HiNet? _instance;
+  //
+  // static HiNet? getInstance() {
+  //   _instance ??= HiNet._();
+  //   return _instance;
+  // }
 
+  /// 普通单利
   static HiNet? _instance;
 
-  static HiNet? getInstance() {
-    _instance ??= HiNet._();
+  static get instance {
+    _instance ??= HiNet._internal();
     return _instance;
   }
+
+  HiNet._internal();
+
+  /// 工厂函数模式
+  // HiNet._internal();
+  //
+  // factory HiNet() => _instance;
+  // static late final HiNet _instance = HiNet._internal();
 
   Future fire(BaseRequest request) async {
     HiNetResponse? response;
