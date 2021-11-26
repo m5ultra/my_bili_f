@@ -11,6 +11,7 @@ class DioAdapter extends HiNetAdapter {
     var response, options = Options(headers: request.header);
     var error;
     var _dio = Dio();
+
     try {
       if (request.httpMethod() == HttpMethod.GET) {
         response = await _dio.get(request.url(), options: options);
