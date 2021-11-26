@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:my_bili_f/db/hi_cache.dart';
 import 'package:my_bili_f/http/core/hi_error.dart';
 import 'package:my_bili_f/http/core/hi_net.dart';
 import 'package:my_bili_f/http/request/test_request.dart';
@@ -37,6 +38,12 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   static const _counter = 0;
 
+  @override
+  void initState() {
+    super.initState();
+    HiCache.preInit();
+  }
+
   test() {
     var jsonStr =
         "{ \"name\": \"flutter\", \"url\": \"https://coding.imooc.com/class/487.html\" }";
@@ -66,6 +73,12 @@ class _MyHomePageState extends State<MyHomePage> {
     print('owner: ${res.userInfo.age}');
   }
 
+  void test2() {
+    HiCache.getInstance()!.setString('aa', '1234');
+    var val = HiCache.getInstance()!.get('aa');
+    print(val);
+  }
+
   void _incrementCounter() async {
     TestRequest request = TestRequest();
     request
@@ -88,7 +101,8 @@ class _MyHomePageState extends State<MyHomePage> {
     }
     // jsonDecode 将字符串转成
     // test();
-    test1();
+    // test1();
+    test2();
   }
 
   @override
