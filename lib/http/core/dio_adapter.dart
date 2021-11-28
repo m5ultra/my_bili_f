@@ -15,16 +15,6 @@ class DioAdapter extends HiNetAdapter {
       if (request.httpMethod() == HttpMethod.GET) {
         response = await _dio.get(request.url(), options: options);
       } else if (request.httpMethod() == HttpMethod.POST) {
-        // try {
-        //   _dio.options.connectTimeout = 5000;
-        //   _dio.options.receiveTimeout = 3000;
-        //   response = await _dio.post(
-        //     'http://localhost:5288/users/login',
-        //     data: {"name": "卡布奇诺", "password": "123456"},
-        //   );
-        // } catch (e) {
-        //   print(e);
-        // }
         response = await _dio.post(request.url(),
             data: request.params, options: options);
       } else if (request.httpMethod() == HttpMethod.DELETE) {

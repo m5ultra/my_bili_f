@@ -31,9 +31,13 @@ abstract class BaseRequest {
       }
     }
     if (useHttps) {
-      uri = Uri.https(authority(), pathStr, params);
+      httpMethod() == HttpMethod.GET
+          ? uri = Uri.https(authority(), pathStr, params)
+          : uri = Uri.https(authority(), pathStr);
     } else {
-      uri = Uri.http(authority(), pathStr, params);
+      httpMethod() == HttpMethod.GET
+          ? uri = Uri.http(authority(), pathStr, params)
+          : uri = Uri.http(authority(), pathStr);
     }
     if (uri.toString().endsWith('?')) {
       return uri

@@ -57,6 +57,7 @@ class HiNet {
       case 401:
         throw NeedLogin();
       case 403:
+      case 409:
         throw NeedAuth(result.toString(), data: result);
       default:
         throw HiNetError(status, result.toString(), data: result);

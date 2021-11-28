@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:my_bili_f/db/hi_cache.dart';
 import 'package:my_bili_f/http/core/hi_error.dart';
 import 'package:my_bili_f/http/core/hi_net.dart';
+import 'package:my_bili_f/http/dao/login_dao.dart';
 import 'package:my_bili_f/http/request/test_request.dart';
 
 import 'model/result.dart';
@@ -103,6 +104,7 @@ class _MyHomePageState extends State<MyHomePage> {
     // test();
     // test1();
     test2();
+    testLogin();
   }
 
   @override
@@ -131,5 +133,19 @@ class _MyHomePageState extends State<MyHomePage> {
         child: const Icon(Icons.add),
       ),
     );
+  }
+
+  void testLogin() async {
+    try {
+      var result = await LoginDao.registration(
+          '测试登录幕客2', '123456', '这里是幕客网编号', '这里是订单编号');
+      print(result);
+    } on NeedAuth catch (e) {
+      print(e);
+    } on HiNetError catch (e) {
+      print(e);
+    } catch (e) {
+      print(e);
+    }
   }
 }
