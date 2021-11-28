@@ -1,3 +1,5 @@
+import 'package:my_bili_f/db/hi_cache.dart';
+
 enum HttpMethod { GET, POST, DELETE }
 
 /// 基础请求
@@ -21,6 +23,9 @@ abstract class BaseRequest {
   String url() {
     Uri uri;
     String pathStr = path();
+    if (needLogin()) {
+      addHeader('token', HiCache.getInstance()!.get('token'));
+    }
 
     ///拼接path参数
     if (pathParams != null) {
@@ -48,8 +53,7 @@ abstract class BaseRequest {
     }
   }
 
-  bool nedLogin();
-
+  bool needLogin();
   Map<String, String> params = {};
 
   /// 添加参数

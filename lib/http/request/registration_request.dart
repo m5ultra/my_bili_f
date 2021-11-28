@@ -7,7 +7,7 @@ class RegistrationRequest extends BaseRequest {
   }
 
   @override
-  bool nedLogin() {
+  bool needLogin() {
     return false;
   }
 

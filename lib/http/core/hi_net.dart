@@ -39,7 +39,6 @@ class HiNet {
     } on HiNetError catch (e) {
       error = e;
       response = e.data;
-      printLog(e.message);
     } catch (e) {
       // 其他异常
       error = e;
@@ -49,7 +48,6 @@ class HiNet {
       printLog(error);
     }
     var result = response?.data;
-    printLog(result);
     dynamic status = response?.statusCode;
     switch (status) {
       case 200:
@@ -65,8 +63,6 @@ class HiNet {
   }
 
   Future<dynamic> send<T>(BaseRequest request) {
-    printLog('url: ${request.url()}');
-
     /// 使用mock 发送数据
     // HiNetAdapter adapter = MockAdapter();
     HiNetAdapter adapter = DioAdapter();
