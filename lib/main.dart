@@ -3,9 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:my_bili_f/db/hi_cache.dart';
 import 'package:my_bili_f/http/core/hi_error.dart';
-import 'package:my_bili_f/http/core/hi_net.dart';
 import 'package:my_bili_f/http/dao/login_dao.dart';
-import 'package:my_bili_f/http/request/test_request.dart';
 
 import 'model/result.dart';
 
@@ -81,29 +79,10 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _incrementCounter() async {
-    TestRequest request = TestRequest();
-    request
-        .add('name', '卡布奇诺')
-        .add('password', '123456')
-        .addHeader('connectTimeout', 50 * 1000)
-        .addHeader('receiveTimeout', 50 * 1000)
-        .addHeader("contentType", "application/json");
-    try {
-      var result = await HiNet.instance.fire(request);
-      print('main: ${result}');
-    } on NeedAuth catch (e) {
-      print(e);
-    } on NeedLogin catch (e) {
-      print(e);
-    } on HiNetError catch (e) {
-      print(e);
-    } catch (e) {
-      print(e);
-    }
     // jsonDecode 将字符串转成
     // test();
     // test1();
-    test2();
+    // test2();
     testLogin();
   }
 
@@ -137,8 +116,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void testLogin() async {
     try {
-      var result = await LoginDao.registration(
-          '测试登录幕客2', '123456', '这里是幕客网编号', '这里是订单编号');
+      // var result = await LoginDao.registration(
+      //     '测试登录幕客2', '123456', '这里是幕客网编号', '这里是订单编号');
+      var result = await LoginDao.login('测试登录幕客2', "123456");
       print(result);
     } on NeedAuth catch (e) {
       print(e);

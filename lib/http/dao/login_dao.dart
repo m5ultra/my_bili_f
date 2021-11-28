@@ -17,14 +17,15 @@ class LoginDao {
     BaseRequest request;
     if (imoocId != null && orderId != null) {
       request = RegistrationRequest();
+      request
+          .add('name', name)
+          .add('password', password)
+          .add('imoocId', imoocId)
+          .add('orderId', orderId);
     } else {
       request = LoginRequest();
+      request.add('name', name).add('password', password);
     }
-    request
-        .add('name', name)
-        .add('password', password)
-        .add('imoocId', imoocId)
-        .add('orderId', orderId);
     return HiNet.instance.fire(request);
   }
 }
