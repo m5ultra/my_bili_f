@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:my_bili_f/widget/appbar.dart';
+import 'package:my_bili_f/widget/login_effect.dart';
 import 'package:my_bili_f/widget/login_input.dart';
 
 class RegistrationPage extends StatefulWidget {
@@ -10,16 +12,20 @@ class RegistrationPage extends StatefulWidget {
 }
 
 class _RegistrationPageState extends State<RegistrationPage> {
+  bool protect = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('注册页面'),
+      appBar: appBar(
+        '注册',
+        '登录',
+        () {},
       ),
       body: Container(
         child: Center(
           child: ListView(
             children: [
+              LoginEffect(protect: protect),
               LoginInput(
                 title: '姓名',
                 hint: '请输入姓名',
@@ -33,7 +39,11 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 obscureText: true,
                 keyboardType: TextInputType.text,
                 onChange: (val) {},
-                focusChanged: (isFalsity) {},
+                focusChanged: (isFocus) {
+                  setState(() {
+                    protect = isFocus;
+                  });
+                },
               ),
             ],
           ),
