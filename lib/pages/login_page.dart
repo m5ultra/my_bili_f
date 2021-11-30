@@ -26,9 +26,11 @@ class _LoginPageState extends State<LoginPage> {
   _handleLogin() async {
     try {
       final res = Login.fromJson(await LoginDao.login(userName, password));
-      HiCache.getInstance()!.prefs!.setString('token', res.token);
+      print(res.msg);
       if (res.success) {
-        print(res.msg);
+        HiCache.getInstance()!.prefs!.setString('token', res.token);
+      } else {
+        print(res);
       }
     } catch (e) {
       print(e);

@@ -16,3 +16,12 @@ For help getting started with Flutter, view our
 samples, guidance on mobile development, and a full API reference.
 
 ### /// https://api.devio.org/uapi/swagger-ui.html  API文档
+
+## 生成JSON序列化文件失败时执行此指令
+```shell
+flutter clean
+
+flutter pub get
+
+flutter packages pub run build_runner build --delete-conflicting-outputs  
+```
