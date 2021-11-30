@@ -1,4 +1,1 @@
-{
-  "code": "0",
-  "msg": "success"
-}
+{"status": 200, "msg": "登陆成功", "success": true, "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWEzMDBiMDI3MDIyMzdiNmQwOTY3ZjAiLCJuYW1lIjoiNjY2IiwiaWF0IjoxNjM4MjcwNzY0LCJleHAiOjE2MzgyNzQzNjR9.9mjguDoP6OqBAvFFs4Pmp4h0-11F4sVnv3WRFzN7J04"}

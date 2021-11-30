@@ -26,6 +26,6 @@ class LoginDao {
       request = LoginRequest();
       request.add('name', name).add('password', password);
     }
-    return HiNet.instance.fire(request);
+    return await HiNet.instance.fire(request);
   }
 }

@@ -1,5 +1,5 @@
 class Utils {
-  static isNotEmpty(str) {
-    return !(str == '');
+  static isNotEmpty(String str) {
+    return !(str.trim() == '');
   }
 }

@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:my_bili_f/http/dao/login_dao.dart';
-import 'package:my_bili_f/model/res_registration.dart';
+import 'package:my_bili_f/model/registration.dart';
 import 'package:my_bili_f/util/color.dart';
 import 'package:my_bili_f/util/utils.dart';
 import 'package:my_bili_f/widget/appbar.dart';
@@ -145,19 +145,28 @@ class _RegistrationPageState extends State<RegistrationPage> {
         await LoginDao.registration(userName, password, imoocId, orderId));
     if (res.code == 0) {
       Fluttertoast.showToast(
-          msg: "注册成功。",
+          msg: res.msg,
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.TOP,
           timeInSecForIosWeb: 1,
           backgroundColor: white,
           textColor: primary,
           fontSize: 16.0);
-    }
 
-    Timer.periodic(const Duration(milliseconds: 1500), (t) {
-      Fluttertoast.cancel();
-      t.cancel();
-      print('=======跳转到登录页面，带上用户账户和密码=======');
-    });
+      Timer.periodic(const Duration(milliseconds: 1500), (t) {
+        Fluttertoast.cancel();
+        t.cancel();
+        print('=======跳转到登录页面，带上用户账户和密码=======');
+      });
+    } else if (res.code == 409) {
+      Fluttertoast.showToast(
+          msg: res.msg,
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.TOP,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0);
+    }
   }
 }
