@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:my_bili_f/db/hi_cache.dart';
 import 'package:my_bili_f/http/dao/login_dao.dart';
 import 'package:my_bili_f/model/login.dart';
-import 'package:my_bili_f/util/color.dart';
 import 'package:my_bili_f/util/utils.dart';
 import 'package:my_bili_f/widget/appbar.dart';
+import 'package:my_bili_f/widget/login_button.dart';
 import 'package:my_bili_f/widget/login_effect.dart';
 import 'package:my_bili_f/widget/login_input.dart';
 
@@ -76,13 +76,10 @@ class _LoginPageState extends State<LoginPage> {
             Container(
               height: 70,
               padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
-              child: ElevatedButton(
-                onPressed: loginEnable ? _handleLogin : null,
-                child: const Text('登录', style: TextStyle(fontSize: 18)),
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(primary),
-                  foregroundColor: MaterialStateProperty.all(white),
-                ),
+              child: LoginButton(
+                '登录',
+                enable: loginEnable,
+                onPressed: _handleLogin,
               ),
             )
           ],

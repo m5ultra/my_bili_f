@@ -135,9 +135,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
   _handleRegistration() {
     if (password == rePassword) {
       _send();
-    } else {
-      print('密码不一致');
-    }
+    } else {}
   }
 
   void _send() async {
@@ -156,7 +154,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
       Timer.periodic(const Duration(milliseconds: 1500), (t) {
         Fluttertoast.cancel();
         t.cancel();
-        print('=======跳转到登录页面，带上用户账户和密码=======');
       });
     } else if (res.code == 409) {
       Fluttertoast.showToast(
