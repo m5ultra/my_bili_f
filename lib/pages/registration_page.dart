@@ -142,28 +142,13 @@ class _RegistrationPageState extends State<RegistrationPage> {
     final res = RegistrationResult.fromJson(
         await LoginDao.registration(userName, password, imoocId, orderId));
     if (res.code == 0) {
-      Fluttertoast.showToast(
-          msg: res.msg,
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.TOP,
-          timeInSecForIosWeb: 1,
-          backgroundColor: white,
-          textColor: primary,
-          fontSize: 16.0);
-
+      Utils.showSuccessToast(message: res.msg);
       Timer.periodic(const Duration(milliseconds: 1500), (t) {
         Fluttertoast.cancel();
         t.cancel();
       });
     } else if (res.code == 409) {
-      Fluttertoast.showToast(
-          msg: res.msg,
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.TOP,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.red,
-          textColor: Colors.white,
-          fontSize: 16.0);
+      Utils.showAlarmToast(message: res.msg);
     }
   }
 }
