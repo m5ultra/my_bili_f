@@ -9,6 +9,17 @@ pageWrap(Widget child) {
   return MaterialPage(child: child, key: ValueKey(child.hashCode));
 }
 
+/// 获取路由页面在堆栈中的位置
+int getPageIndex(List<MaterialPage> pages, RoutesStatus routesStatus) {
+  for (int i = 0; i < pages.length; i++) {
+    MaterialPage page = pages[i];
+    if (getStatus(page) == routesStatus) {
+      return i;
+    }
+  }
+  return -1;
+}
+
 /// 自定义路由的封装
 
 enum RoutesStatus {

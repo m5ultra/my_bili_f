@@ -1,9 +1,14 @@
+import 'package:my_bili_f/db/hi_cache.dart';
 import 'package:my_bili_f/http/core/hi_net.dart';
 import 'package:my_bili_f/http/request/base_request.dart';
 import 'package:my_bili_f/http/request/login_request.dart';
 import 'package:my_bili_f/http/request/registration_request.dart';
 
 class LoginDao {
+  static getToken() {
+    return HiCache.getInstance()!.prefs!.get('token');
+  }
+
   static login(String name, String password) {
     return _send(name, password);
   }

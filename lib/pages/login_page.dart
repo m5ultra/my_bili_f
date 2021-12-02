@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:my_bili_f/db/hi_cache.dart';
 import 'package:my_bili_f/http/dao/login_dao.dart';
 import 'package:my_bili_f/model/login.dart';
@@ -28,6 +29,7 @@ class _LoginPageState extends State<LoginPage> {
       final res = Login.fromJson(await LoginDao.login(userName, password));
       if (res.success) {
         HiCache.getInstance()!.prefs!.setString('token', res.token);
+        Utils.showSuccessToast(message: res.msg, pos: ToastGravity.CENTER);
       } else {
         print(res);
       }

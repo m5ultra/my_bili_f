@@ -24,7 +24,7 @@ class _HomePageState extends State<HomePage> {
               height: 20,
             ),
             MaterialButton(
-              onPressed: () => widget.onJumpDetail(VideoModel(1111)),
+              onPressed: () => widget.onJumpDetail(VideoModel(2222)),
               child: const Text('go to detail'),
             )
           ],

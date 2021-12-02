@@ -12,14 +12,13 @@ import 'package:my_bili_f/widget/login_effect.dart';
 import 'package:my_bili_f/widget/login_input.dart';
 
 class RegistrationPage extends StatefulWidget {
-  const RegistrationPage({Key? key}) : super(key: key);
+  final VoidCallback onJumpLogin;
+
+  const RegistrationPage({Key? key, required this.onJumpLogin})
+      : super(key: key);
 
   @override
   _RegistrationPageState createState() => _RegistrationPageState();
-
-  void onJumpLogin() {
-    print('right btn click');
-  }
 }
 
 class _RegistrationPageState extends State<RegistrationPage> {

@@ -10,9 +10,7 @@ class HiCache {
 
   static HiCache? _instance;
 
-  HiCache._pre(SharedPreferences prefs) {
-    this.prefs = prefs;
-  }
+  HiCache._pre(this.prefs);
 
   ///预初始化，防止在使用get时，prefs还未完成初始化
   static Future<HiCache?> preInit() async {
