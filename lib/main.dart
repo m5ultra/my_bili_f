@@ -54,7 +54,7 @@ class BiliRouteDelegate extends RouterDelegate<BiliRouterPah>
       pageWrap(
         HomePage(
           onJumpDetail: (_videoModel) {
-            _videoModel = _videoModel;
+            this._videoModel = _videoModel;
             notifyListeners();
           },
         ),
