@@ -18,7 +18,6 @@ class BiliRoot extends StatefulWidget {
 
 class _BiliRootState extends State<BiliRoot> {
   final BiliRouteDelegate _routerDelegate = BiliRouteDelegate();
-  // final BiliRouterInformationParser _routerInformationParser = BiliRouterInformationParser();
 
   @override
   Widget build(BuildContext context) {
@@ -28,12 +27,6 @@ class _BiliRootState extends State<BiliRoot> {
         var widget = snapshot.connectionState == ConnectionState.done
             ? Router(
                 routerDelegate: _routerDelegate,
-                // routeInformationParser: _routerInformationParser,
-                ///routeInformationParser 为null可以缺省
-                // routeInformationProvider: PlatformRouteInformationProvider(
-                //   initialRouteInformation:
-                //       const RouteInformation(location: '/'),
-                // ),
               )
             : const Scaffold(
                 body: Center(
