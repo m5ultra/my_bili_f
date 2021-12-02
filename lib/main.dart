@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:my_bili_f/db/hi_cache.dart';
 import 'package:my_bili_f/model/video_model.dart';
 import 'package:my_bili_f/pages/home_page.dart';
 import 'package:my_bili_f/pages/video_detail_page.dart';
+import 'package:my_bili_f/util/color.dart';
 
 void main() {
   runApp(const BiliRoot());
@@ -16,23 +18,36 @@ class BiliRoot extends StatefulWidget {
 
 class _BiliRootState extends State<BiliRoot> {
   final BiliRouteDelegate _routerDelegate = BiliRouteDelegate();
-  final BiliRouterInformationParser _routerInformationParser =
-      BiliRouterInformationParser();
+  // final BiliRouterInformationParser _routerInformationParser = BiliRouterInformationParser();
 
   @override
   Widget build(BuildContext context) {
-    var widget = Router(
-      routerDelegate: _routerDelegate,
-      routeInformationParser: _routerInformationParser,
-
-      ///routeInformationParser 为null可以缺省
-      routeInformationProvider: PlatformRouteInformationProvider(
-          initialRouteInformation: const RouteInformation(location: '/')),
-    );
-
-    return MaterialApp(
-      home: widget,
-      debugShowCheckedModeBanner: false,
+    return FutureBuilder<HiCache?>(
+      future: HiCache.preInit(),
+      builder: (BuildContext context, AsyncSnapshot<HiCache?> snapshot) {
+        var widget = snapshot.connectionState == ConnectionState.done
+            ? Router(
+                routerDelegate: _routerDelegate,
+                // routeInformationParser: _routerInformationParser,
+                ///routeInformationParser 为null可以缺省
+                // routeInformationProvider: PlatformRouteInformationProvider(
+                //   initialRouteInformation:
+                //       const RouteInformation(location: '/'),
+                // ),
+              )
+            : const Scaffold(
+                body: Center(
+                  child: CircularProgressIndicator(),
+                ),
+              );
+        return MaterialApp(
+          home: widget,
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+            primarySwatch: white,
+          ),
+        );
+      },
     );
   }
 }
