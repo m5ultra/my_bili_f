@@ -10,9 +10,7 @@ import 'package:my_bili_f/util/color.dart';
 
 import 'http/dao/login_dao.dart';
 
-void main() {
-  runApp(const BiliRoot());
-}
+void main() => runApp(const BiliRoot());
 
 class BiliRoot extends StatefulWidget {
   const BiliRoot({Key? key}) : super(key: key);
@@ -50,7 +48,7 @@ class _BiliRootState extends State<BiliRoot> {
   }
 }
 
-class BiliRouteDelegate extends RouterDelegate<BiliRouterPah>
+class BiliRouteDelegate extends RouterDelegate<BiliRouterPath>
     with ChangeNotifier, PopNavigatorRouterDelegateMixin {
   @override
   final GlobalKey<NavigatorState> navigatorKey;
@@ -127,17 +125,17 @@ class BiliRouteDelegate extends RouterDelegate<BiliRouterPah>
   }
 
   @override
-  Future<void> setNewRoutePath(BiliRouterPah configuration) async {}
+  Future<void> setNewRoutePath(BiliRouterPath configuration) async {}
 }
 
 /// 定义路由数据 path
 
-class BiliRouterPah {
+class BiliRouterPath {
   final String location;
 
-  BiliRouterPah.home() : location = '/';
+  BiliRouterPath.home() : location = '/';
 
-  BiliRouterPah.detail() : location = '/detail';
+  BiliRouterPath.detail() : location = '/detail';
 }
 
 /// 创建路由页面
