@@ -7,6 +7,7 @@ import 'package:my_bili_f/pages/login_page.dart';
 import 'package:my_bili_f/pages/registration_page.dart';
 import 'package:my_bili_f/pages/video_detail_page.dart';
 import 'package:my_bili_f/util/color.dart';
+import 'package:my_bili_f/util/utils.dart';
 
 import 'http/dao/login_dao.dart';
 
@@ -105,23 +106,48 @@ class BiliRouteDelegate extends RouterDelegate<BiliRouterPath>
         }),
       );
     } else if (routesStatus == RoutesStatus.login) {
-      page = pageWrap(const LoginPage());
+      page = pageWrap(LoginPage(
+        onJumpRegistration: () {
+          _routesStatus = RoutesStatus.registration;
+          notifyListeners();
+        },
+        onLoginSuc: () {
+          _routesStatus = RoutesStatus.home;
+          notifyListeners();
+        },
+      ));
     }
     // 重新创建一个数组 否则pages 因引用没有改变路由不会生效
     tempPages = [...tempPages, page];
     pages = tempPages;
-    return Navigator(
-      key: navigatorKey,
-      pages: pages,
+    return WillPopScope(
+        child: Navigator(
+          key: navigatorKey,
+          pages: pages,
 
-      /// 在这里可以控制是否可以返回
-      onPopPage: (route, result) {
-        if (!route.didPop(result)) {
-          return false;
-        }
-        return true;
-      },
-    );
+          /// 在这里可以控制是否可以返回
+          onPopPage: (route, result) {
+            if (route.settings is MaterialPage) {
+              /// 登录页未登录反击拦截
+              if ((route.settings as MaterialPage).child is LoginPage) {
+                if (!hasLogin) {
+                  Utils.showAlarmToast(message: '请先登录!');
+
+                  /// return false 拦截返回
+                  return false;
+                }
+              }
+            }
+            if (!route.didPop(result)) {
+              return false;
+            }
+            pages.removeLast();
+            return true;
+          },
+        ),
+        onWillPop: () async {
+          return !await navigatorKey.currentState!.maybePop();
+        });
   }
 
   @override

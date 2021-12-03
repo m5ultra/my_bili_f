@@ -10,8 +10,13 @@ import 'package:my_bili_f/widget/login_effect.dart';
 import 'package:my_bili_f/widget/login_input.dart';
 
 class LoginPage extends StatefulWidget {
+  final VoidCallback onJumpRegistration;
+  final VoidCallback onLoginSuc;
+
   const LoginPage({
     Key? key,
+    required this.onJumpRegistration,
+    required this.onLoginSuc,
   }) : super(key: key);
 
   @override
@@ -30,8 +35,12 @@ class _LoginPageState extends State<LoginPage> {
       if (res.success) {
         HiCache.getInstance()!.prefs!.setString('token', res.token);
         Utils.showSuccessToast(message: res.msg, pos: ToastGravity.CENTER);
+        print('loginSuccess');
+
+        /// 登录成功跳转到首页
+        widget.onLoginSuc();
       } else {
-        print(res);
+        Utils.showAlarmToast(message: res.msg);
       }
     } catch (e) {
       print(e);
@@ -41,50 +50,51 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: appBar('密码登录', '注册', () {}),
-        body: ListView(
-          children: [
-            LoginEffect(protect: protect),
-            LoginInput(
-              focusChanged: (bool v) {
-                setState(() {
-                  protect = false;
-                });
-              },
-              title: '用户名',
-              hint: '请输入用户名',
-              keyboardType: TextInputType.text,
-              onChange: (String v) {
-                userName = v;
-                _checkParams();
-              },
+      appBar: appBar('密码登录', '注册', widget.onJumpRegistration),
+      body: ListView(
+        children: [
+          LoginEffect(protect: protect),
+          LoginInput(
+            focusChanged: (bool v) {
+              setState(() {
+                protect = false;
+              });
+            },
+            title: '用户名',
+            hint: '请输入用户名',
+            keyboardType: TextInputType.text,
+            onChange: (String v) {
+              userName = v;
+              _checkParams();
+            },
+          ),
+          LoginInput(
+            focusChanged: (isFocus) {
+              setState(() {
+                protect = isFocus;
+              });
+            },
+            title: '密码',
+            hint: '请输入密码',
+            obscureText: true,
+            keyboardType: TextInputType.text,
+            onChange: (String v) {
+              password = v;
+              _checkParams();
+            },
+          ),
+          Container(
+            height: 70,
+            padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
+            child: LoginButton(
+              '登录',
+              enable: loginEnable,
+              onPressed: _handleLogin,
             ),
-            LoginInput(
-              focusChanged: (isFocus) {
-                setState(() {
-                  protect = isFocus;
-                });
-              },
-              title: '密码',
-              hint: '请输入密码',
-              obscureText: true,
-              keyboardType: TextInputType.text,
-              onChange: (String v) {
-                password = v;
-                _checkParams();
-              },
-            ),
-            Container(
-              height: 70,
-              padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
-              child: LoginButton(
-                '登录',
-                enable: loginEnable,
-                onPressed: _handleLogin,
-              ),
-            )
-          ],
-        ));
+          )
+        ],
+      ),
+    );
   }
 
   void _checkParams() {
